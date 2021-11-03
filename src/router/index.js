@@ -1,27 +1,45 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import store from "../store";
+import Home from "../views/Home.vue";
+import supervisorsRoutes from "./supervisors";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/",
+    name: "Home",
+    component: Home,
   },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+  ...supervisorsRoutes,
+];
 
 const router = new VueRouter({
-  routes
-})
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      const position = {};
+      if (to.hash) {
+        position.selector = to.hash;
+        if (document.querySelector(to.hash)) {
+          return position;
+        }
+        return false;
+      }
+      return { x: 0, y: 0 };
+    }
+  },
+});
 
-export default router
+router.beforeEach((to, from, next) => {
+  let isAuthenticated = store.getters["Supervisors/isAuthenticated"];
+  if (to.name == "Login" && isAuthenticated) next({ name: "Home" });
+  else if (to.name !== "Login" && !isAuthenticated) {
+    next({ name: "Login", query: { next: to.name } });
+  } else next();
+});
+
+export default router;

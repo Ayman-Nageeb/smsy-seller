@@ -1,3 +1,22 @@
 {
-  "message": "hello i18n !!"
+  "direction": "ltr",
+  "pages": {
+    "login": {
+      "title" : "Welcome to OceanSMS Supervisors Panel",
+      "subtitle": "Sign In To Your Account",
+      "fields": {
+        "user_name": {
+          "label": "User Name",
+          "placeholder": "Enter your supervisor user name"
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": "Enter your password"
+        }
+      },
+      "actions": {
+        "login": "Login"
+      }
+    }
+  }
 }

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@mdi/font": "5.9.55",
+    "@smartweb/vue-flash-message": "^0.6.10",
     "axios": "^0.23.0",
     "core-js": "^3.6.5",
     "roboto-fontface": "*",

@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar
+    <!-- <v-app-bar
       app
       color="primary"
       dark
@@ -35,21 +35,36 @@
         <span class="mr-2">Latest Release</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
-    </v-app-bar>
+    </v-app-bar> -->
 
     <v-main>
-      <router-view/>
+      <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script>
+import { mainEventBus } from "./main";
 
 export default {
-  name: 'App',
+  name: "App",
 
   data: () => ({
     //
   }),
+  methods: {
+    changeLocale(locale) {
+      this.$i18n.locale = locale;
+      this.$vuetify.rtl = this.$t("direction") == "rtl";
+      window.localStorage.setItem("locale", locale);
+      this.$forceUpdate();
+      // window.location.reload();
+    },
+  },
+  created() {
+    mainEventBus.$on("changeLocale", (locale) => {
+      this.changeLocale(locale);
+    });
+  },
 };
 </script>
