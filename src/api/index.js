@@ -17,7 +17,7 @@ export default {
           if (router.history.current.name == "Login") {
             throw error;
           }
-          alert("go to login page");
+          alert("go to login page HTTP_UNAUTHORIZED");
           router.push({ name: "Login", query: { "next": router.history.current.name}});
           break;
         default:

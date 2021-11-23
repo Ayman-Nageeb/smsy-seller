@@ -4,6 +4,7 @@ import store from "../store";
 import Home from "../views/Home.vue";
 import supervisorsRoutes from "./supervisors";
 
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -14,6 +15,7 @@ const routes = [
   },
   ...supervisorsRoutes,
 ];
+
 
 const router = new VueRouter({
   routes,

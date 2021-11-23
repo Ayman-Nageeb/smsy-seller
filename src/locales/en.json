@@ -17,6 +17,10 @@
       "actions": {
         "login": "Login"
       }
+    },
+    "logout": {
+      "loading": "logging out",
+      "unknown_error": "something went wrong"
     }
   }
 }
