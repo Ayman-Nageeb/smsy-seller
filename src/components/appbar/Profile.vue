@@ -1,0 +1,91 @@
+<template>
+  <div>
+    <v-menu
+      v-model="menu"
+      :close-on-content-click="false"
+      :nudge-width="300"
+      offset-y
+      class="pt-4"
+      rounded="lg"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn icon color="primary" dark v-bind="attrs" v-on="on">
+          <v-icon size="28" dark>mdi-account-circle-outline</v-icon>
+        </v-btn>
+      </template>
+
+      <v-card class="pa-0">
+        <v-list>
+          <v-list-item-group color="primary" >
+            <v-list-item route to="/profile">
+              <v-list-item-avatar>
+                 <v-icon size="50" color="primary">mdi-account-circle</v-icon>
+                
+              </v-list-item-avatar>
+
+              <v-list-item-content>
+                <v-list-item-title class="font-weight-bold"
+                  >Fillan Fillany</v-list-item-title
+                >
+                <v-list-item-subtitle>See your profile</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+
+        <v-divider></v-divider>
+
+        <v-list class="">
+          <v-list-item-group>
+            <v-list-item
+              v-for="(route, index) of routes"
+              :key="index"
+              route
+              :to="route.route"
+            >
+              <v-list-item-icon>
+                <v-icon size="36">{{ route.icon }}</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>{{ route.text }}</v-list-item-title>
+              </v-list-item-content>
+              <v-list-item-icon>
+                <v-icon>mdi-chevron-right</v-icon>
+              </v-list-item-icon>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+      </v-card>
+    </v-menu>
+  </div>
+</template>
+
+<script>
+export default {
+  data: () => ({
+    fav: true,
+    menu: false,
+    message: false,
+    hints: true,
+    routes: [],
+  }),
+  methods: {
+    setRoutes(){
+      let initialRoutes = [
+        { text: this.$t("pages.logout.logout"), icon: "mdi-logout", route: "/logout" }
+      ];
+
+      for (let route of initialRoutes ) {
+        this.routes.push(route);
+      }
+      
+    }
+  },
+  created(){
+    this.setRoutes();
+  },
+
+};
+</script>
+
+<style></style>

@@ -19,6 +19,7 @@
       }
     },
     "logout": {
+      "logout": "Logout",
       "loading": "logging out",
       "unknown_error": "something went wrong"
     }
