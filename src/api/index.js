@@ -1,12 +1,26 @@
 import axios from "axios";
 import { responseCodes } from "./responseCodes";
 import router from "../router/index";
+import store from "../store";
+import { currentSupervisorPermissionsURL, logoutURL, refreshCurrentSupervisorPermissions } from "./supervisors";
 
 export default {
   async makeAPIRequest(method, url, data) {
     const requestConfiguration = { method, url, data };
     try {
       const response = await axios(requestConfiguration);
+      //always refresh current authenticated supervisor permissions after the request is ended
+      if (store.getters["Supervisors/isAuthenticated"]){
+        const dont_refresh_urls = [
+          currentSupervisorPermissionsURL(),
+          logoutURL,
+        ];
+        
+        if(dont_refresh_urls.indexOf(url) < 0) {
+          refreshCurrentSupervisorPermissions();
+        }
+      }
+      //-------------- end of refreshing permissions -------------//
       return response;
     } catch (error) {
       const responseCode = error.response.status;
@@ -18,7 +32,10 @@ export default {
             throw error;
           }
           alert("go to login page HTTP_UNAUTHORIZED");
-          router.push({ name: "Login", query: { "next": router.history.current.name}});
+          router.push({
+            name: "Login",
+            query: { next: router.history.current.name },
+          });
           break;
         default:
           throw error;

@@ -1,10 +1,12 @@
 <template>
-  <div>Home</div>
+  <div>{{$store.getters["Supervisors/permissions"]}}</div>
 </template>
 
 <script>
-
-  export default {
-    name: 'Home',
-  }
+export default {
+  name: "Home",
+  created() {
+    
+  },
+};
 </script>

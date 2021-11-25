@@ -8,4 +8,8 @@ export default {
   authorizationToken(state) {
     return state.authorizationToken;
   },
+  permissions(state)
+  {
+    return state.permissions ;
+  }
 };
