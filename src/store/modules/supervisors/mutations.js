@@ -11,8 +11,8 @@ export default {
   setAuthorizationToken(state, token) {
     state.authorizationToken = token;
   },
-  setPermissions(state, permissions)
-  {
-    state.permissions = permissions
-  }
+  setPermissions(state, permissions) {
+    state.permissions = permissions;
+  },
+  
 };

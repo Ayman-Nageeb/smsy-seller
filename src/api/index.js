@@ -17,7 +17,7 @@ export default {
         ];
         
         if(dont_refresh_urls.indexOf(url) < 0) {
-          refreshCurrentSupervisorPermissions();
+          await refreshCurrentSupervisorPermissions();
         }
       }
       //-------------- end of refreshing permissions -------------//

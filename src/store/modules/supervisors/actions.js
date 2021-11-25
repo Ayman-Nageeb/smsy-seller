@@ -1,7 +1,8 @@
 import config from "../../../api/config";
+import { refreshCurrentSupervisorPermissions } from "../../../api/supervisors";
 
 export default {
-  login(context, payload) {
+  async login(context, payload) {
     context.commit("setAuthorizationToken", payload.token);
     context.commit("setSupervisor", payload.supervisor);
     context.commit("setAsAuthenticated");
@@ -13,6 +14,7 @@ export default {
     );
 
     config.setAuthorizationHeader(payload.token);
+    await refreshCurrentSupervisorPermissions();
   },
   logout(context) {
     context.commit("setAuthorizationToken", null);

@@ -110,7 +110,7 @@
 
 <script>
 import { mainEventBus } from "../main";
-import { login as supervisorsLogin, refreshCurrentSupervisorPermissions } from "../api/supervisors";
+import { login as supervisorsLogin } from "../api/supervisors";
 import responseCodes from "../api/responseCodes";
 export default {
   name: "Home",
@@ -174,10 +174,7 @@ export default {
 
         //set the current authenticated supervisor data
 
-        this.$store.dispatch("Supervisors/login", data.data);
-
-        //load supervisor permissions
-        refreshCurrentSupervisorPermissions();
+        await this.$store.dispatch("Supervisors/login", data.data);
         
         //redirect the user to next
 
