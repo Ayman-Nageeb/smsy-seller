@@ -3,8 +3,9 @@
     <v-menu open-on-hover offset-y>
       <template v-slot:activator="{ on, attrs }">
         <v-btn color="primary" dark v-bind="attrs" v-on="on" rounded text>
-          <v-icon>mdi-translate</v-icon>
-          <v-icon>mdi-arrow-down</v-icon>
+          <v-icon >mdi-translate</v-icon>
+          <span class="mx-1">{{$t('name')}}</span>
+          <v-icon >mdi-chevron-down</v-icon>
         </v-btn>
       </template>
 

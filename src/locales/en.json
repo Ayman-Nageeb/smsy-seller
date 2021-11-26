@@ -1,5 +1,6 @@
 {
   "direction": "ltr",
+  "name": "English",
   "pages": {
     "login": {
       "title" : "Welcome to OceanSMS Supervisors Panel",

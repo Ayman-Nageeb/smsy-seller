@@ -25,8 +25,6 @@ Vue.use(permissions, {});
 
 export const mainEventBus = new Vue({store});
 
-Vue.prototype.$permissions = Vue.observable(permissions);
-
 
 let vm = new Vue({
   router,
