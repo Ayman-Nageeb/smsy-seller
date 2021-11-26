@@ -1,8 +1,6 @@
 <template>
-  <v-app-bar elevate-on-scroll app flat outlined>
-    <v-app-bar-nav-icon color="primary">
-
-    </v-app-bar-nav-icon>
+  <v-app-bar elevate-on-scroll app flat >
+    <v-app-bar-nav-icon color="primary"> </v-app-bar-nav-icon>
 
     <div>
       <router-link :to="{ name: 'Home' }">
@@ -10,16 +8,26 @@
       </router-link>
     </div>
     <v-spacer></v-spacer>
-    <lang-switch class="mx-2" />
+    
+    <lang-switch />
+    <v-btn text icon color="primary" class="mx-2"  @click="toggleTheme">
+      <v-icon>mdi-theme-light-dark</v-icon>
+    </v-btn>
     <profile />
   </v-app-bar>
 </template>
 
 <script>
-import LangSwitch from './appbar/LangSwitch.vue';
+import { mainEventBus } from '../main';
+import LangSwitch from "./appbar/LangSwitch.vue";
 import Profile from "./appbar/Profile.vue";
 export default {
   components: { Profile, LangSwitch },
+  methods: {
+    toggleTheme() {
+      mainEventBus.$emit("toggleTheme");
+    },
+  },
 };
 </script>
 

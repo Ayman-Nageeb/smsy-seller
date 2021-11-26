@@ -9,18 +9,20 @@
 
 <script>
 import { mainEventBus } from "./main";
-import AppBar from './components/AppBar.vue';
+import userConfig from "./config/index";
+
+import AppBar from "./components/AppBar.vue";
 
 export default {
   name: "App",
-  components: {AppBar},
+  components: { AppBar },
   data: () => ({
     //
   }),
   computed: {
-    showAppBar(){
+    showAppBar() {
       return this.$store.getters["Supervisors/isAuthenticated"];
-    }
+    },
   },
   methods: {
     changeLocale(locale) {
@@ -30,11 +32,20 @@ export default {
       this.$forceUpdate();
       // window.location.reload();
     },
+
+    toggleTheme() {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+      window.localStorage.setItem(
+        "isDarkTheme",
+        Number(this.$vuetify.theme.dark)
+      );
+    },
   },
   created() {
-    mainEventBus.$on("changeLocale", (locale) => {
-      this.changeLocale(locale);
-    });
+    userConfig.loadTheme(this.$vuetify);
+    mainEventBus.$on("toggleTheme", this.toggleTheme);
+
+    mainEventBus.$on("changeLocale", this.changeLocale);
   },
 };
 </script>

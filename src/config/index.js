@@ -6,6 +6,7 @@ export default {
   loadConfig() {
     this.loadLocale();
     this.loadUser();
+
   },
   loadLocale() {
     if (window.localStorage.getItem("locale")) {
@@ -36,4 +37,13 @@ export default {
       store.dispatch("Supervisors/logout");
     }
   },
+  loadTheme(vuetifyInstance){
+    vuetifyInstance.theme.dark = false;
+    if(window.localStorage.getItem('isDarkTheme')){
+      const isDark =Number(window.localStorage.getItem('isDarkTheme'));
+      if(isDark){
+        vuetifyInstance.theme.dark = true;
+      }
+    }
+  }
 };

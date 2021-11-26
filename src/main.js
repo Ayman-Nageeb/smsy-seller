@@ -14,8 +14,8 @@ import APIConfig from "./api/config";
 import userConfig from './config/index';
 import permissions from "./plugins/permissions";
 
-userConfig.loadConfig();
 APIConfig.setDefaults();
+userConfig.loadConfig();
 
 
 Vue.config.productionTip = false;
@@ -26,12 +26,10 @@ Vue.use(permissions, {});
 export const mainEventBus = new Vue({store});
 
 
-let vm = new Vue({
+new Vue({
   router,
   store,
   i18n,
   vuetify,
   render: (h) => h(App),
 }).$mount("#app");
-
-vm.$data.$permissions = Vue.observable(permissions);
