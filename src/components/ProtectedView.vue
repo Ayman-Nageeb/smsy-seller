@@ -1,6 +1,5 @@
 <template>
   <div v-if="allowed">
-    {{has}}, {{hasOneOf}}
     <slot></slot>
   </div>
 </template>

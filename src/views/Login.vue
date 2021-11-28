@@ -1,10 +1,10 @@
 <template>
-  <div style="height: 100vh; background:white">
+  <div style="height: 100vh;">
     <v-container fill-height>
       <v-row align="center" justify="center">
         <v-col class="pt-6">
           <v-card
-            class="pa-6 pt-0 mt-6 mx-auto login-container-box"
+            class="pa-6 pt-0 ma-2 mt-2 mx-auto login-container-box"
             elevation=""
             max-width="520"
             outlined
@@ -84,7 +84,7 @@
               </v-btn>
             </v-card-actions>
           </v-card>
-          <v-card max-width="540" class="mx-auto" flat>
+          <v-card max-width="520" class="ma-2 mx-auto" flat outlined>
             <v-card-actions>
               <v-btn small text class="mx-1" @click="changeLocale('ar')"
                 >العربية</v-btn
@@ -93,6 +93,16 @@
               <v-btn small text class="mx-1" @click="changeLocale('en')"
                 >english</v-btn
               >
+              <v-spacer></v-spacer>
+              <v-btn
+                text
+                icon
+                color="primary"
+                class="mx-2"
+                @click="toggleTheme"
+              >
+                <v-icon>mdi-theme-light-dark</v-icon>
+              </v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -103,7 +113,6 @@
 
 <style scoped>
 .login-container-box {
-  border: 1px solid rgba(76, 0, 130, 0.603) !important;
   border-radius: 12px !important;
 }
 </style>
@@ -137,8 +146,10 @@ export default {
     changeLocale(locale) {
       mainEventBus.$emit("changeLocale", locale);
     },
+    toggleTheme() {
+      mainEventBus.$emit("toggleTheme");
+    },
     async login() {
-
       //if already trying to login dont try again
       if (this.loading) return false;
 
@@ -175,11 +186,14 @@ export default {
         //set the current authenticated supervisor data
 
         await this.$store.dispatch("Supervisors/login", data.data);
-        
+
         //redirect the user to next
 
         let next = "Home";
-        if (this.$route.query.next) {
+        if (
+          this.$route.query.next &&
+          this.$route.query.next.toLowerCase() != "notfound"
+        ) {
           next = this.$route.query.next;
         }
         this.$router.push({ name: next });

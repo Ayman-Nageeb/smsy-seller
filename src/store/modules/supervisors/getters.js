@@ -1,3 +1,5 @@
+import router from "../../../router/index";
+
 export default {
   isAuthenticated(state) {
     return state.isAuthenticated;
@@ -46,6 +48,16 @@ export default {
 
         // this means no permissions exists
         return false;
+      },
+      authorize: function(permissions) {
+        if (!this.has(permissions)) {
+          router.push({ name: "Unauthorized" });
+        }
+      },
+      authorizeOneOf: function(permissions) {
+        if (!this.hasOneOf(permissions)) {
+          router.push({ name: "Unauthorized" });
+        }
       },
     };
   },

@@ -1,19 +1,33 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "../store";
-import Home from "../views/Home.vue";
 import supervisorsRoutes from "./supervisors";
-
+import rolesRoutes from './roles';
 
 Vue.use(VueRouter);
 
-const routes = [
+const mainRoutes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: ()=>import(/* webpackChunkName: "home" */"../views/Home.vue"),
   },
+];
+
+const routes = [
+  ...mainRoutes,
   ...supervisorsRoutes,
+  ...rolesRoutes,
+  {
+    path: "/unauthorized",
+    name: "Unauthorized",
+    component: () => import(/* webpackChunkName: "unauthorized" */ "../views/Unauthorized.vue"),
+  },
+  {
+    path: "*",
+    name: "NotFound",
+    component: () => import(/* webpackChunkName: "notfound" */ "../views/NotFound.vue"),
+  },
 ];
 
 

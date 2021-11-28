@@ -1,11 +1,12 @@
 <template>
   <v-app>
+    
     <app-bar v-if="showAppBar"></app-bar>
     <v-main id="main-area">
-      <router-view />
+      <router-view class="pa-4" />
     </v-main>
   </v-app>
-</template>
+</template>c
 
 <script>
 import { mainEventBus } from "./main";

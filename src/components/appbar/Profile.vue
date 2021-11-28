@@ -11,7 +11,7 @@
     >
       <template v-slot:activator="{ on, attrs }">
         <v-btn icon color="primary" dark v-bind="attrs" v-on="on">
-          <v-icon size="28" dark>mdi-account-circle-outline</v-icon>
+          <v-icon dark>mdi-account-circle-outline</v-icon>
         </v-btn>
       </template>
 
@@ -24,10 +24,14 @@
               </v-list-item-avatar>
 
               <v-list-item-content>
-                <v-list-item-title class="font-weight-bold">{{
-                  $store.getters["Supervisors/supervisor"].name
-                }}</v-list-item-title>
-                <v-list-item-subtitle>See your profile</v-list-item-subtitle>
+                <v-list-item-title class="font-weight-bold"
+                  >{{ $store.getters["Supervisors/supervisor"].name }}
+                  <span class="font-weight-regular primary--text">
+                    (@{{ $store.getters["Supervisors/supervisor"].user_name }})
+                  </span>
+                </v-list-item-title>
+
+                <v-list-item-subtitle>{{$t("appbar.go_to_your_profile")}}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-list-item-group>

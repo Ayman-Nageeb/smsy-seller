@@ -1,9 +1,22 @@
 {
   "direction": "ltr",
   "name": "English",
+  "appbar": {
+    "go_to_your_profile": "see your profile"
+  },
   "pages": {
+    "not_found": {
+      "title": "not found",
+      "message": "We can not find what you are looking for",
+      "go_to_home": "Go to home page"
+    },
+    "unauthorized": {
+      "title": "Forbidden",
+      "message": "You are not allowed to access this resource",
+      "go_to_home": "Go to home page"
+    },
     "login": {
-      "title" : "Welcome to OceanSMS Supervisors Panel",
+      "title": "Welcome to OceanSMS Supervisors Panel",
       "subtitle": "Sign In To Your Account",
       "fields": {
         "user_name": {
@@ -23,6 +36,21 @@
       "logout": "Logout",
       "loading": "logging out",
       "unknown_error": "something went wrong"
+    },
+    "roles": {
+      "title": "System Roles",
+      "subtitle": "Roles are groups of permission"
+    }
+  },
+  "navigation": {
+    "drawer": {
+      "roles": "roles"
+    }
+  },
+  "components": {
+    "search_field": {
+      "placeholder": "Enter search query",
+      "default_text": "Add New"
     }
   }
 }
