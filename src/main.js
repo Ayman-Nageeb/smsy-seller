@@ -14,14 +14,14 @@ import userConfig from "./config/index";
 
 import ProtectedView from "./components/ProtectedView.vue";
 
-APIConfig.setDefaults();
-userConfig.loadConfig();
-
 Vue.config.productionTip = false;
 
 Vue.use(FlashMessage, { strategy: "multiple" });
 
 export const mainEventBus = new Vue({ store });
+
+APIConfig.setDefaults();
+userConfig.loadConfig();
 
 Vue.component("protected-view", ProtectedView);
 Vue.prototype.$permissions = () => {

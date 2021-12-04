@@ -1,9 +1,15 @@
 import Vue from "vue";
 import Vuetify from "vuetify/lib/framework";
 
+import * as locales from "vuetify/lib/locale/index"
+
 Vue.use(Vuetify);
 
 export default new Vuetify({
+  lang: {
+    locales: locales,
+    current: process.env.VUE_APP_I18N_LOCALE || 'en',
+  },
   theme: {
     themes: {
       light: {

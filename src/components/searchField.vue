@@ -7,7 +7,7 @@
         : placeholder
     "
     v-model="value"
-    append-icon="mdi-magnify"
+    :append-icon="`mdi-magnify ${$t('direction').toLowerCase() == 'rtl'? 'mdi-rotate-90': ''}`"
   ></v-text-field>
 </template>
 

@@ -29,6 +29,7 @@ export default {
     changeLocale(locale) {
       this.$i18n.locale = locale;
       this.$vuetify.rtl = this.$t("direction") == "rtl";
+      this.$vuetify.lang.current = locale;
       window.localStorage.setItem("locale", locale);
       this.$forceUpdate();
       // window.location.reload();
@@ -41,12 +42,20 @@ export default {
         Number(this.$vuetify.theme.dark)
       );
     },
+
+    setMainEventBusListener(){
+      mainEventBus.$on("toggleTheme", this.toggleTheme);
+      mainEventBus.$on("changeLocale", this.changeLocale);
+    }
+
   },
   created() {
-    userConfig.loadTheme(this.$vuetify);
-    mainEventBus.$on("toggleTheme", this.toggleTheme);
 
-    mainEventBus.$on("changeLocale", this.changeLocale);
+    this.setMainEventBusListener();
+    userConfig.loadLocale();
+    userConfig.loadTheme(this.$vuetify);
+    
+    
   },
 };
 </script>

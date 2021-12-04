@@ -1,23 +1,31 @@
 <template>
   <div>
-    <h2 class="display-2">{{ $t("pages.roles.title") }}</h2>
-    <p class="my-2">{{ $t("pages.roles.subtitle") }}</p>
+    <router-view></router-view>
+
     <v-row>
       <v-col>
-        <search-field v-model="filterQuery" />
+        <div class="d-flex justify-space-between align-center">
+          <div>
+            <h2 class="display-2">{{ $t("pages.roles.title") }}</h2>
+            <p class="my-2">{{ $t("pages.roles.subtitle") }}</p>
+          </div>
+          <add-form-route :has="['roles::add']" routeName="Roles.create" />
+        </div>
       </v-col>
+    </v-row>
+    <v-row>
       <v-col>
-        <add-form-route :has="['roles::add']" routeName="Roles.add" />
+        <roles-list />
       </v-col>
     </v-row>
   </div>
 </template>
 
 <script>
-import AddFormRoute from '../components/AddFormRoute.vue';
-import searchField from "../components/searchField.vue";
+import AddFormRoute from "../../components/AddFormRoute.vue";
+import RolesList from "../../components/roles/rolesList.vue";
 export default {
-  components: { searchField, AddFormRoute },
+  components: { AddFormRoute, RolesList },
   async created() {
     await this.loadRoles();
   },
