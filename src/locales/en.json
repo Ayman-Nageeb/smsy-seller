@@ -70,11 +70,295 @@
         "save": "Save",
         "cancel": "Cancel"
       }
+    },
+    "supervisors": {
+      "title": "Supervisors",
+      "subtitle": "System Administrators and supervisors",
+      "list": {
+        "datatable": {
+          "headers": {
+            "name": "Name",
+            "user_name": "User Name",
+            "roles": "Roles",
+            "status": "Status",
+            "last_activity": "Last Activity"
+          }
+        }
+      }
+    },
+    "create_supervisor": {
+      "title": "Create New Supervisor",
+      "copy_generated_password": "Please copy the generated Password",
+      "password_copied_successfully": "Password has been copied successfully",
+      "form": {
+        "name": {
+          "label": "Name",
+          "placeholder": "Enter supervisor name",
+          "errors": {
+            "empty": "Please Enter the name"
+          }
+        },
+        "user_name": {
+          "label": "User Name",
+          "placeholder": "Enter a unique supervisor user_name",
+          "errors": {
+            "empty": "Please Enter the user name"
+          }
+        },
+        "notes": {
+          "label": "Notes",
+          "placeholder": "Enter notes about this supervisor",
+          "errors": {
+            "empty": "Please Enter the user name"
+          }
+        },
+        "roles": {
+          "label": "Roles",
+          "placeholder": "Select supervisor roles",
+          "errors": {
+            "empty": "Please at least select one role"
+          }
+        }
+      }
+    },
+    "show_supervisor": {
+      "title": "Supervisor",
+      "password": "Password",
+      "tabs": {
+        "basic": "Basic",
+        "roles": "Roles",
+        "operations": "Operations"
+      }
+    },
+    "groups": {
+      "title": "Sellers Groups",
+      "subtitle": "Groups of feature for sellers",
+      "datatable": {
+        "headers": {
+          "title": "Title",
+          "features": "Features",
+          "sellers": "Sellers",
+          "actions": "Actions",
+          "remove": "Remove"
+        }
+      }
+    },
+    "create_group": {
+      "title": "Add New Group",
+      "form": {
+        "name": {
+          "placeholder": "Enter group name",
+          "label": "Name",
+          "errors": {
+            "empty": "Please Enter the name"
+          }
+        },
+        "permissions": {
+          "label": "Features",
+          "placeholder": "Select features for the new group",
+          "errors": {
+            "empty": "Please select one feature at least"
+          }
+        },
+        "save": "Save",
+        "cancel": "Cancel"
+      }
+    },
+    "sellers": {
+      "title": "Seller",
+      "subtitle": "Service sellers",
+      "list": {
+        "datatable": {
+          "headers": {
+            "name": "Name",
+            "user_name": "User Name",
+            "company": "Company",
+            "status": "Status",
+            "last_activity": "Last Activity"
+          }
+        }
+      }
+    },
+    "create_seller": {
+      "title": "Create New Seller",
+      "copy_generated_password": "Please copy the generated Password",
+      "password_copied_successfully": "Password has been copied successfully",
+      "form": {
+        "name": {
+          "label": "Name",
+          "placeholder": "Enter seller name",
+          "errors": {
+            "empty": "Please Enter the name"
+          }
+        },
+        "user_name": {
+          "label": "User Name",
+          "placeholder": "Enter a unique seller user_name",
+          "errors": {
+            "empty": "Please Enter the user name"
+          }
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "Please enter the seller email"
+        },
+        "company": {
+          "label": "Company name",
+          "placeholder": "Please enter the seller company name"
+        },
+        "phones": {
+          "label": "Phones' numbers",
+          "placeholder": "Please enter the seller phones' numbers (multiple)"
+        },
+        "notes": {
+          "label": "Notes",
+          "placeholder": "Enter notes about this seller",
+          "errors": {
+            "empty": "Please Enter the note"
+          }
+        },
+        "groups": {
+          "label": "Groups",
+          "placeholder": "Select seller groups",
+          "errors": {
+            "empty": "Please at least select one group"
+          }
+        }
+      }
+    },
+    "show_seller": {
+      "title": "Seller",
+      "tabs": {
+        "basic": {
+          "title": "Basic"
+        },
+        "groups": {
+          "title": "Groups"
+        },
+        "operations": {
+          "title": "Operations"
+        },
+        "packages": {
+          "title": "Packages",
+          "subscribe": "add subscription",
+          "subscription_success": "Subscribed successfully"
+        },
+        "subscriptions": {
+          "title": "subscriptions",
+          "headers": {
+            "package": "Package",
+            "capacity": "Capacity",
+            "used": "Used",
+            "remaining": "Remaining",
+            "price": "Price",
+            "payed": "Payed",
+            "expiration_date": "Expiration",
+            "creation_date": "Requested",
+            "confirmation_date": "Confirmation",
+            "status": "Status",
+            "actions": "Actions"
+          }
+        },
+        "sender_ids": {
+          "title": "Sender IDS"
+        }
+      }
+    },
+    "create_package": {
+      "title": "Create new package",
+      "form": {
+        "name": {
+          "label": "Name",
+          "placeholder": "Enter Package name"
+        },
+        "capacity": {
+          "label": "Capacity",
+          "placeholder": "Enter package capacity"
+        },
+        "duration": {
+          "label": "Duration",
+          "placeholder": "Enter package duration"
+        },
+        "duration_unit": {
+          "label": "Duration unit",
+          "placeholder": "Select package duration unit"
+        },
+        "price": {
+          "label": "Price",
+          "placeholder": "Enter package price"
+        },
+        "notes": {
+          "label": "Notes",
+          "placeholder": "Enter notes about the package"
+        },
+        "groups": {
+          "label": "Groups",
+          "placeholder": "Select package groups",
+          "errors": {
+            "empty": "Please at least select one group"
+          }
+        }
+      }
+    },
+    "packages": {
+      "list": {
+        "datatable": {
+          "headers": {
+            "name": "Name",
+            "price": "Price",
+            "capacity": "Capacity",
+            "duration": "Duration",
+            "status": "Status"
+          }
+        }
+      }
+    },
+    "show_package": {
+      "title": "Package",
+      "tabs": {
+        "basic": "Basic",
+        "groups": "Groups",
+        "operations": "Operations"
+      },
+      "actions": {
+        "activate": "Activate",
+        "deactivate": "Deactivate"
+      }
+    },
+    "sender_ids": {
+      "title": "SMS Sender IDs",
+      "subtitle": "view and control SMS sender IDs",
+      "datatable": {
+        "headers": {
+          "name": "Sender ID",
+          "sellers": "Sellers",
+          "status": "Status",
+          "creation_date": "Created at",
+          "actions": "Actions"
+        }
+      }
+    },
+    "create_sender_id": {
+      "title": "Add New Sender ID",
+      "form": {
+        "name": {
+          "label": "Sender ID",
+          "placeholder": "Enter a unique Sender ID",
+          "errors": {
+            "empty": "Please enter the ID"
+          }
+        }
+      }
     }
   },
   "navigation": {
     "drawer": {
-      "roles": "roles"
+      "groups": "Sellers Groups",
+      "roles": "Supervisors Roles",
+      "supervisors": "Supervisors",
+      "sellers": "Sellers",
+      "packages": "SMS Packages",
+      "sender_ids": "SMS Sender IDs"
     }
   },
   "components": {
@@ -101,6 +385,27 @@
     "confirm_delete": {
       "title": "Confirm Deletion",
       "message": "Are you sure you want to delete this item"
+    },
+    "supervisor_roles_tab": {
+      "roles": {
+        "title": "Roles",
+        "edit_btn": "Edit"
+      },
+      "permissions": {
+        "title": "Permissions"
+      }
+    },
+    "supervisor_operation_tab": {
+      "remove_btn": "Remove Supervisor",
+      "suspend_btn": "Suspend Account",
+      "activate_btn": "Activate Account",
+      "reset_password_btn": "Reset Password"
+    },
+    "locked_view": {
+      "tooltips": {
+        "open": "Double Click to open lock",
+        "lock": "Click to lock"
+      }
     }
   },
   "errors": {
@@ -123,5 +428,50 @@
     "roles::update": "Update Role",
     "roles::view_permissions": "View Role Permissions",
     "roles::set_permissions": "Set Role Permissions"
+  },
+  "models": {
+    "supervisor": {
+      "status": {
+        "ACTIVE": "Active",
+        "SUSPENDED": "Suspended"
+      }
+    },
+    "sellers": {
+      "status": {
+        "ACTIVE": "Active",
+        "SUSPENDED": "Suspended"
+      },
+      "subscription": {
+        "status": {
+          "ACTIVE": "Active",
+          "INACTIVE": "Inactive"
+        }
+      }
+    },
+    "packages": {
+      "duration_units": {
+        "DAYS": "Day/s",
+        "MONTHS": "Month/s"
+      },
+      "status": {
+        "ACTIVE": "Active",
+        "INACTIVE": "Inactive"
+      }
+    },
+    "sender_ids": {
+      "status": {
+        "ACTIVE": "Active",
+        "INACTIVE": "Inactive"
+      }
+    }
+  },
+  "misc": {
+    "cancel": "Cancel",
+    "close": "Close",
+    "edit": "Edit",
+    "save": "Save",
+    "remove": "Remove",
+    "password": "Password",
+    "confirm_password": "Confirm Password"
   }
 }

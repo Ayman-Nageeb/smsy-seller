@@ -1,16 +1,15 @@
 <template>
-  <div>
+  <div class="d-inline-block">
     <popup-edit
       :show-dialog="showEditDialog"
-      type="string"
-      :name="field.name"
-      :value="field.value"
+      :datatype="type"
+      :field="field"
       @cancel="showEditDialog = false"
       :apiEndPoint="apiEndPoint"
       @updated="updated"
     />
     <v-card
-      class="d-flex align-center"
+      class="d-flex align-center pa-0 ma-0"
       @mouseenter="showEditBtn = true"
       @mouseleave="showEditBtn = false"
       flat
@@ -18,6 +17,7 @@
       color="transparent"
     >
       <v-card-text class="pa-1">
+
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
             <div
@@ -26,7 +26,10 @@
               class="d-inline-block"
               @dblclick="showEditDialog = true"
             >
-              <slot>{{ field.value }}</slot>
+              <slot>
+                <v-icon v-if="showEmptyValueIcon">mdi-dots-horizontal</v-icon>
+                {{ field.value }}
+              </slot>
             </div>
           </template>
           <span>{{
@@ -83,7 +86,10 @@ export default {
       type: Object,
       default: () => ({
         name: "",
-        value: "",
+        value: null,
+        min: "",
+        max: "",
+        step: "",
       }),
     },
     btnTooltip: {
@@ -100,6 +106,31 @@ export default {
       showEditBtn: false,
       showEditDialog: false,
     };
+  },
+  computed: {
+    showEmptyValueIcon() {
+      
+      if (this.field.value == null) {
+        return true;
+      }
+
+      if (typeof this.field.value == "string") {
+        const isEmptyString = this.field.value.trim() == "";
+        return isEmptyString;
+      }
+
+      if (typeof this.field.value == "object") {
+        const objectString = JSON.stringify(this.field.value);
+        if (objectString == "{}" || objectString == "[]") return true;
+        else return false;
+      }
+
+
+
+      if (!isNaN(this.field.value)) return false;
+
+      return true;
+    },
   },
   methods: {
     updated(newValue) {

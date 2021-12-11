@@ -17,7 +17,7 @@
         :loading="loading"
         :search="search"
       >
-        <template v-slot:item.name="{ value, item }">
+        <template v-slot:[`item.name`]="{ value, item }">
           <editable
             :field="{ name: 'name', value: value }"
             :apiEndPoint="getEditRoleNameURL(item.id)"
@@ -25,17 +25,17 @@
           >
           </editable>
         </template>
-        <template v-slot:item.permissions="{ item }">
+        <template v-slot:[`item.permissions`]="{ item }">
           <list-permissions
             :permissions="item.permissions"
             :role="item"
             @updated="loadRoles"
           />
         </template>
-        <template v-slot:item.supervisors="{ item }">
+        <template v-slot:[`item.supervisors`]="{ item }">
           <list-supervisors :supervisors="item.supervisors" />
         </template>
-        <template v-slot:item.remove="{ item }">
+        <template v-slot:[`item.remove`]="{ item }">
           <v-btn
             icon
             color="error"
@@ -59,7 +59,7 @@ import Editable from "../Editable.vue";
 import { datatableColumn } from "../ListDataTable.vue";
 import SearchField from "../searchField.vue";
 import ListPermissions from "./listPermissions.vue";
-import ListSupervisors from "./listSupervisors.vue";
+import ListSupervisors from "./listRoleSupervisors.vue";
 export default {
   components: {
     SearchField,
@@ -112,7 +112,7 @@ export default {
         datatableColumn(
           this.$t("pages.roles.datatable.headers.remove"),
           "remove",
-          () => this.$permissions().has(["supervisors::remove"]),
+          () => this.$permissions().has(["roles::remove"]),
           {
             align:
               this.$t("direction").toLowerCase() == "rtl" ? "left" : "right",

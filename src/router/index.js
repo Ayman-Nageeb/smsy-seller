@@ -2,7 +2,11 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "../store";
 import supervisorsRoutes from "./supervisors";
-import rolesRoutes from './roles';
+import rolesRoutes from "./roles";
+import groupsRoutes from "./groups";
+import sellersRoutes from "./sellers";
+import packagesRoutes from "./packages";
+import senderIdsRoutes from './senderIds';
 
 Vue.use(VueRouter);
 
@@ -10,7 +14,7 @@ const mainRoutes = [
   {
     path: "/",
     name: "Home",
-    component: ()=>import(/* webpackChunkName: "home" */"../views/Home.vue"),
+    component: () => import(/* webpackChunkName: "home" */ "../views/Home.vue"),
   },
 ];
 
@@ -18,18 +22,25 @@ const routes = [
   ...mainRoutes,
   ...supervisorsRoutes,
   ...rolesRoutes,
+  ...groupsRoutes,
+  ...sellersRoutes,
+  ...packagesRoutes,
+  ...senderIdsRoutes,
   {
     path: "/unauthorized",
     name: "Unauthorized",
-    component: () => import(/* webpackChunkName: "unauthorized" */ "../views/Unauthorized.vue"),
+    component: () =>
+      import(
+        /* webpackChunkName: "unauthorized" */ "../views/Unauthorized.vue"
+      ),
   },
   {
     path: "*",
     name: "NotFound",
-    component: () => import(/* webpackChunkName: "notfound" */ "../views/NotFound.vue"),
+    component: () =>
+      import(/* webpackChunkName: "notfound" */ "../views/NotFound.vue"),
   },
 ];
-
 
 const router = new VueRouter({
   routes,

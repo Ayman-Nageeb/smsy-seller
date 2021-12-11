@@ -1,7 +1,7 @@
 <template>
-  <div v-if="allowed">
+  <span v-if="allowed" >
     <slot></slot>
-  </div>
+  </span>
 </template>
 
 <script>

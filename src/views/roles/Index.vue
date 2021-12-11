@@ -15,7 +15,9 @@
     </v-row>
     <v-row>
       <v-col>
-        <roles-list />
+        <protected-view :has="['roles::retrieve']">
+          <roles-list />
+        </protected-view>
       </v-col>
     </v-row>
   </div>
@@ -27,6 +29,14 @@ import RolesList from "../../components/roles/rolesList.vue";
 export default {
   components: { AddFormRoute, RolesList },
   async created() {
+    this.$permissions().authorizeOneOf([
+      "roles::add",
+      "roles::remove",
+      "roles::retrieve",
+      "roles::update",
+      "roles::view_permissions",
+      "roles::set_permissions",
+    ]);
     await this.loadRoles();
   },
   data() {

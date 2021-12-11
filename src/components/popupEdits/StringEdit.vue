@@ -1,36 +1,27 @@
 <template>
   <v-text-field
     type="text"
-    :placeholder="placeholder"
-    :label="label"
+    :placeholder="field.placeholder"
+    :label="field.label || field.name"
     v-model="inputtedValue"
     outlined
     color="primary"
     class="pa-0 ma-0"
     clearable
     counter
-    :min="min"
-    :max="max"
+    :min="field.min"
+    :max="field.max"
   ></v-text-field>
 </template>
 
 <script>
 export default {
   props: {
-    placeholder: {
-      type: String,
-      default: "",
-    },
-    label: {
-      type: String,
-      default: "",
-    },
-    defaultValue: {
-      type: String,
+    field: {
+      type: Object,
       required: true,
+      default: () => {},
     },
-    min: {},
-    max: {},
   },
   data() {
     return {
@@ -38,7 +29,8 @@ export default {
     };
   },
   mounted() {
-    this.inputtedValue = this.defaultValue;
+    if (!this.field.value) this.inputtedValue = this.field.default;
+    else this.inputtedValue = this.field.value;
   },
   watch: {
     inputtedValue() {

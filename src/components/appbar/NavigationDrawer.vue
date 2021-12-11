@@ -22,11 +22,11 @@
         :has="route.has ? route.has : []"
         :hasOneOf="route.hasOneOf ? route.hasOneOf : []"
       >
-        <v-list-item route :to="{ name: route.name }">
+        <v-list-item route :to="{ name: route.name }" class="my-1">
           <v-list-item-icon>
             <v-icon>{{ route.icon }}</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>{{ $t(`navigation.drawer.${route.titleKey}`) }}</v-list-item-title>
+          <v-list-item-title>{{ $t(`navigation.drawer.${route.titleKey.toLowerCase()}`) }}</v-list-item-title>
         </v-list-item>
       </protected-view>
     </v-list>

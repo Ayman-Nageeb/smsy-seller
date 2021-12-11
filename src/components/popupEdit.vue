@@ -8,18 +8,28 @@
     transition="dialog-transition"
   >
     <v-card :loading="loading" :disabled="loading">
-      <v-card-title >
-        {{$t('components.pupup_edit.title')}}
-        {{name}}
+      <v-card-title>
+        {{ $t("components.pupup_edit.title") }}
+        {{ field.label || field.name }}
       </v-card-title>
       <v-card-text class="pt-8">
         <div v-if="datatype.toLowerCase() == 'string'">
-          <string-edit
-            :default-value="value"
-            :label="name"
-            @save="submitData"
-            @input="syncValue"
-          />
+          <string-edit :field="field" @save="submitData" @input="syncValue" />
+        </div>
+        <div v-if="datatype.toLowerCase() == 'password'">
+          <password-edit :field="field" @save="submitData" @input="syncValue" />
+        </div>
+        <div v-if="datatype.toLowerCase() == 'text'">
+          <text-edit :field="field" @save="submitData" @input="syncValue" />
+        </div>
+        <div v-if="datatype.toLowerCase() == 'numeric'">
+          <numeric-edit :field="field" @save="submitData" @input="syncValue" />
+        </div>
+        <div v-if="datatype.toLowerCase() == 'menu'">
+          <menu-edit :field="field" @save="submitData" @input="syncValue" />
+        </div>
+        <div v-if="datatype.toLowerCase() == 'combobox'">
+          <combobox-edit :field="field" @save="submitData" @input="syncValue" />
         </div>
         <div v-if="hasError">
           <v-alert
@@ -85,21 +95,31 @@
 
 <script>
 import api from "../api";
+import ComboboxEdit from "./popupEdits/ComboboxEdit.vue";
+import MenuEdit from "./popupEdits/MenuEdit.vue";
+import NumericEdit from "./popupEdits/NumericEdit.vue";
+import PasswordEdit from "./popupEdits/PasswordEdit.vue";
 import StringEdit from "./popupEdits/StringEdit.vue";
+import TextEdit from "./popupEdits/TextEdit.vue";
 export default {
-  components: { StringEdit },
+  components: {
+    StringEdit,
+    TextEdit,
+    NumericEdit,
+    MenuEdit,
+    ComboboxEdit,
+    PasswordEdit,
+  },
   props: {
+    field: {
+      type: Object,
+      default: () => {},
+      required: true,
+    },
     showDialog: {
       type: Boolean,
     },
-    name: {
-      type: String,
-      required: true,
-    },
-    value: {
-      type: String,
-      default: "",
-    },
+
     datatype: {
       type: String,
       default: "string",
@@ -111,7 +131,7 @@ export default {
   },
   data() {
     return {
-      dataValue: "",
+      dataValue: null,
       loading: false,
       hasError: false,
       errorMsg: "",
@@ -119,7 +139,11 @@ export default {
     };
   },
   mounted() {
-    this.dataValue = this.value;
+    if (this.field.default) {
+      this.dataValue = this.field.default;
+    } else {
+      this.dataValue = this.field.value;
+    }
   },
   computed: {
     show: {
@@ -147,7 +171,13 @@ export default {
       this.loading = true;
 
       const requestData = {};
-      requestData[this.name] = this.dataValue;
+      if (this.field.confirmation) {
+        requestData[this.field.name] = this.dataValue.value;
+        requestData[this.field.confirmation.name] = this.dataValue.confirmation;
+      } else {
+        requestData[this.field.name] = this.dataValue;
+      }
+
       try {
         const response = await api.put(this.apiEndPoint, requestData);
         console.log("popup edit :", response.data);

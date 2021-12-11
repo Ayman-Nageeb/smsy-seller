@@ -18,7 +18,15 @@
       <v-card class="pa-0">
         <v-list>
           <v-list-item-group color="primary">
-            <v-list-item route to="/profile">
+            <v-list-item
+              route
+              :to="{
+                name: 'Supervisors.show',
+                params: {
+                  user_name: $store.getters['Supervisors/supervisor'].user_name,
+                },
+              }"
+            >
               <v-list-item-avatar>
                 <v-icon size="50" color="primary">mdi-account-circle</v-icon>
               </v-list-item-avatar>
@@ -31,7 +39,9 @@
                   </span>
                 </v-list-item-title>
 
-                <v-list-item-subtitle>{{$t("appbar.go_to_your_profile")}}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{
+                  $t("appbar.go_to_your_profile")
+                }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-list-item-group>

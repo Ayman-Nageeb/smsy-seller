@@ -1,0 +1,23 @@
+{
+  "direction": "rtl",
+  "name": "العربية",
+  "pages": {
+    "login": {
+      "title" : "مرحبا بك في لوحة تحكم المشرفين",
+      "subtitle": "تسجيل الدخول",
+      "fields": {
+        "user_name": {
+          "label": "اسم المستخدك",
+          "placeholder": "ادخل اسم المستخدم"
+        },
+        "password": {
+          "label": "كلمة المرور",
+          "placeholder": "ادخل كلمة المرور هنا"
+        }
+      },
+      "actions": {
+        "login": "تسجيل الدخول"
+      }
+    }
+  }
+}

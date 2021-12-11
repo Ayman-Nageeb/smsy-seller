@@ -158,6 +158,7 @@ export default {
         );
         console.log(response);
         this.showAllPermissionsDialog = false;
+        this.editMode = false;
         this.$emit("updated", "API Event");
       } catch (error) {
         alert(error);
