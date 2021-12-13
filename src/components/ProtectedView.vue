@@ -24,11 +24,11 @@ export default {
       let hasOneOf = true;
 
       if(this.has && this.has.length > 0) {
-        has = this.$store.getters['Supervisors/permissions'].has(this.has);
+        has = this.$store.getters['Seller/permissions'].has(this.has);
       }
 
       if(this.hasOneOf && this.hasOneOf.length > 0) {
-        hasOneOf = this.$store.getters['Supervisors/permissions'].hasOneOf(this.hasOneOf);
+        hasOneOf = this.$store.getters['Seller/permissions'].hasOneOf(this.hasOneOf);
       }
 
 

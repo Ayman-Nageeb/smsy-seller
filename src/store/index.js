@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import Supervisors from './modules/supervisors/index';
+import Seller from './modules/seller/index';
 
 Vue.use(Vuex);
 
@@ -10,6 +10,6 @@ export default new Vuex.Store({
   mutations: {},
   actions: {},
   modules: {
-    Supervisors
+    Seller
   },
 });

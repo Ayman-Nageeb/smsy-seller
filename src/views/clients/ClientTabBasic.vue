@@ -3,7 +3,7 @@
     <v-row>
       <v-col>
         <p class="headline">
-          {{ $t("pages.show_seller.title") }}
+          {{ $t("pages.show_client.title") }}
         </p>
       </v-col>
     </v-row>
@@ -13,10 +13,10 @@
           <v-card-text>
             <span class="font-weight-bold">Name :</span>
             <editable
-              :field="{ name: 'name', value: seller.name }"
-              :apiEndPoint="updateSellerEndPoint"
+              :field="{ name: 'name', value: client.name }"
+              :apiEndPoint="updateClientEndPoint"
               @updated="
-                seller.name = $event;
+                client.name = $event;
                 $emit('update');
               "
             ></editable>
@@ -28,13 +28,13 @@
           <v-card-text>
             <span class="font-weight-bold">User Name </span>
             <editable
-              :field="{ name: 'user_name', value: seller.user_name }"
-              :apiEndPoint="updateSellerEndPoint"
+              :field="{ name: 'user_name', value: client.user_name }"
+              :apiEndPoint="updateClientEndPoint"
               @updated="
-                seller.user_name = $event;
+                client.user_name = $event;
                 $emit('update');
               "
-              >@{{ seller.user_name }}</editable
+              >@{{ client.user_name }}</editable
             >
           </v-card-text>
         </v-card>
@@ -47,10 +47,10 @@
           <v-card-text>
             <span class="font-weight-bold">Email</span>
             <editable
-              :field="{ name: 'email', value: seller.email }"
-              :apiEndPoint="updateSellerEndPoint"
+              :field="{ name: 'email', value: client.email }"
+              :apiEndPoint="updateClientEndPoint"
               @updated="
-                seller.email = $event;
+                client.email = $event;
                 $emit('update');
               "
             ></editable>
@@ -62,10 +62,10 @@
           <v-card-text>
             <span class="font-weight-bold">Company Name :</span>
             <editable
-              :field="{ name: 'company', value: seller.company }"
-              :apiEndPoint="updateSellerEndPoint"
+              :field="{ name: 'company', value: client.company }"
+              :apiEndPoint="updateClientEndPoint"
               @updated="
-                seller.company = $event;
+                client.company = $event;
                 $emit('update');
               "
             ></editable>
@@ -81,15 +81,15 @@
             <span class="font-weight-bold">Phones' Numbers :</span>
             <editable
               type="combobox"
-              :field="{ name: 'phones', value: seller.phones, multiple: true }"
-              :apiEndPoint="updateSellerEndPoint"
+              :field="{ name: 'phones', value: client.phones, multiple: true }"
+              :apiEndPoint="updateClientEndPoint"
               @updated="
-                seller.phones = $event;
+                client.phones = $event;
                 $emit('update');
               "
             >
               <v-chip
-                v-for="(phone, index) of seller.phones"
+                v-for="(phone, index) of client.phones"
                 :key="index"
                 class="mx-1"
               >
@@ -108,7 +108,7 @@
             <editable
               :field="{ name: 'notes', value: seller.notes }"
               type="text"
-              :apiEndPoint="updateSellerEndPoint"
+              :apiEndPoint="updateClientEndPoint"
               @updated="
                 seller.notes = $event;
                 $emit('update');
@@ -122,13 +122,13 @@
 </template>
 
 <script>
-import Editable from "../Editable.vue";
+import Editable from "../../components/Editable.vue";
 export default {
   components: { Editable },
-  props: ["seller"],
+  props: ["client"],
   computed: {
-    updateSellerEndPoint() {
-      return `current-seller`;
+    updateClientEndPoint() {
+      return `current-seller/clients/${this.client.user_name}`;
     },
   },
 };

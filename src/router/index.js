@@ -1,12 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "../store";
-import supervisorsRoutes from "./supervisors";
-import rolesRoutes from "./roles";
-import groupsRoutes from "./groups";
-import sellersRoutes from "./sellers";
 import packagesRoutes from "./packages";
-import senderIdsRoutes from './senderIds';
+import senderIdsRoutes from "./senderIds";
+import sellerRoutes from "./seller";
+import clientsRouts from './clients';
 
 Vue.use(VueRouter);
 
@@ -20,12 +18,10 @@ const mainRoutes = [
 
 const routes = [
   ...mainRoutes,
-  ...supervisorsRoutes,
-  ...rolesRoutes,
-  ...groupsRoutes,
-  ...sellersRoutes,
   ...packagesRoutes,
   ...senderIdsRoutes,
+  ...sellerRoutes,
+  ...clientsRouts,
   {
     path: "/unauthorized",
     name: "Unauthorized",
@@ -62,7 +58,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  let isAuthenticated = store.getters["Supervisors/isAuthenticated"];
+  let isAuthenticated = store.getters["Seller/isAuthenticated"];
   if (to.name == "Login" && isAuthenticated) next({ name: "Home" });
   else if (to.name !== "Login" && !isAuthenticated) {
     next({ name: "Login", query: { next: to.name } });

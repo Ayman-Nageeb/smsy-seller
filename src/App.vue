@@ -6,7 +6,7 @@
         {{ alertText }}
 
         <template v-slot:action="{ attrs }">
-          <v-btn dark icon v-bind="attrs" @click="snackbar = false">
+          <v-btn dark icon v-bind="attrs" @click="showSystemCustomAlert = false">
             <v-icon>mdi-close</v-icon>
           </v-btn>
         </template>
@@ -33,7 +33,7 @@ export default {
   }),
   computed: {
     showAppBar() {
-      return this.$store.getters["Supervisors/isAuthenticated"];
+      return this.$store.getters["Seller/isAuthenticated"];
     },
   },
   methods: {

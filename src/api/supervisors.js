@@ -20,8 +20,8 @@ export const permissionsURL = (supervisorId) => {
 
 export const currentSupervisorPermissionsURL = () => {
   let supervisorId = "un_authenticated_" + Math.random();
-  if (store.getters["Supervisors/isAuthenticated"]) {
-    supervisorId = store.getters["Supervisors/supervisor"].id;
+  if (store.getters["Seller/isAuthenticated"]) {
+    supervisorId = store.getters["Seller/seller"].id;
   }
   return permissionsURL(supervisorId);
 };
@@ -47,10 +47,10 @@ let loadingCurrentSupervisorPermissions = false;
 export const refreshCurrentSupervisorPermissions = async function() {
   if(loadingCurrentSupervisorPermissions) return;
   loadingCurrentSupervisorPermissions = true;
-  if (!store.getters["Supervisors/isAuthenticated"]) return false;
+  if (!store.getters["Seller/isAuthenticated"]) return false;
   const response = await getCurrentSupervisorPermissions();
   const permissions = response.data.data;
-  store.commit("Supervisors/setPermissions", permissions);
+  store.commit("Seller/setPermissions", permissions);
   loadingCurrentSupervisorPermissions = false;
 };
 

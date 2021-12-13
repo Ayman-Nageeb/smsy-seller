@@ -25,7 +25,7 @@ userConfig.loadConfig();
 
 Vue.component("protected-view", ProtectedView);
 Vue.prototype.$permissions = () => {
-  return mainEventBus.$store.getters["Supervisors/permissions"];
+  return mainEventBus.$store.getters["Seller/permissions"];
 };
 const vm = new Vue({
   router,

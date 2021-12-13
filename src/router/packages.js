@@ -6,21 +6,29 @@ const routes = [
       import(
         /* webpackChunkName: "packages.index" */ "../views/packages/Index.vue"
       ),
+  },
+  {
+    path: "/my-packages",
+    name: "MyPackages.index",
+    component: () =>
+      import(
+        /* webpackChunkName: "subscriptions" */ "../views/seller/packages/Index.vue"
+      ),
     children: [
       {
         path: "create",
-        name: "Packages.create",
+        name: "MyPackages.create",
         component: () =>
           import(
-            /* webpackChunkName: "packages.create" */ "../views/packages/Create.vue"
+            /* webpackChunkName: "profile" */ "../views/seller/packages/Create.vue"
           ),
       },
       {
         path: ":id",
-        name: "Packages.show",
+        name: "MyPackages.show",
         component: () =>
           import(
-            /* webpackChunkName: "packages.create" */ "../views/packages/Show.vue"
+            /* webpackChunkName: "profile" */ "../views/seller/packages/Show.vue"
           ),
       },
     ],

@@ -1,4 +1,4 @@
-# admin-panel
+# seller-panel
 
 ## Project setup
 ```

@@ -1,10 +1,10 @@
 import store from "../store";
 
-const permissions = () => store.getters["Supervisors/permissions"];
+const permissions = () => store.getters["Seller/permissions"];
 const hasPermissions = (permissions) => {
   if (!permissions) return false;
 
-  const supervisorPermissions = store.getters["Supervisors/permissions"];
+  const supervisorPermissions = store.getters["Seller/permissions"];
   //if has no permission always return false
   if (supervisorPermissions.length == 0) return false;
 
@@ -23,7 +23,7 @@ const hasPermissions = (permissions) => {
 const hasOneOfPermissions = (permissions) => {
   if (!permissions) return false;
 
-  const supervisorPermissions = store.getters["Supervisors/permissions"];
+  const supervisorPermissions = store.getters["Seller/permissions"];
   //if has no permission always return false
   if (supervisorPermissions.length == 0) return false;
 

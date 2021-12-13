@@ -86,7 +86,7 @@
             </v-row>
             <v-row
               v-if="
-                supervisor.id == $store.getters['Supervisors/supervisor'].id
+                supervisor.id == $store.getters['Seller/seller'].id
               "
             >
               <v-col>

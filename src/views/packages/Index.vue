@@ -1,46 +1,139 @@
 <template>
-  <div>
-    <router-view></router-view>
-
-    <v-row>
-      <v-col>
-        <div class="d-flex justify-space-between align-center">
-          <div>
-            <h2 class="display-2">SMS Packages</h2>
-            <p class="my-2">SMS package and subscription bundles</p>
-          </div>
-          <add-form-route
-            :has="['packages::add']"
-            routeName="Packages.create"
-          />
-        </div>
-      </v-col>
-    </v-row>
-
-    <v-row> </v-row>
-    <protected-view :has="['packages::retrieve']">
-      <list-sms-packages />
-    </protected-view>
+  <div class="px-6 align-top">
+    <v-snackbar
+      v-model="showSubscriptionSuccess"
+      :timeout="2000"
+      color="success"
+      dark
+      top
+      left
+    >
+      {{ $t("pages.show_seller.tabs.packages.subscription_success") }}
+    </v-snackbar>
+    <div class="pa-2 mx-auto d-flex justify-space-around">
+      <v-progress-circular
+        color="primary"
+        v-if="loading"
+        indeterminate
+        class="mx-auto"
+      ></v-progress-circular>
+    </div>
+    <v-card
+      outlined
+      width="350"
+      v-for="(smsPackage, index) of smsPackages"
+      :key="index"
+      class="d-inline-block ma-6"
+      :loading="loading"
+    >
+      <v-card-title>
+        <v-spacer></v-spacer>
+        <span class="headline primary--text font-weight-black">
+          {{ smsPackage.name }}
+        </span>
+        <v-spacer></v-spacer>
+      </v-card-title>
+      <v-divider class=""></v-divider>
+      <v-card-title>
+        <span>
+          {{ $t("pages.create_package.form.price.label") }}
+        </span>
+        <v-spacer></v-spacer>
+        <span class="font-weight-black success--text">
+          {{ smsPackage.price }}
+          <v-icon color="success">mdi-currency-usd</v-icon>
+        </span>
+      </v-card-title>
+      <v-divider class=""></v-divider>
+      <v-card-title>
+        <span>
+          {{ $t("pages.create_package.form.capacity.label") }}
+        </span>
+        <v-spacer></v-spacer>
+        <span class="font-weight-black info--text">
+          {{ smsPackage.price }}
+          <v-icon color="info">mdi-message</v-icon>
+        </span>
+      </v-card-title>
+      <v-divider class=""></v-divider>
+      <v-card-title>
+        <span>
+          {{ $t("pages.create_package.form.duration.label") }}
+        </span>
+        <v-spacer></v-spacer>
+        <span class="font-weight-bold">
+          {{ smsPackage.duration }}
+          {{ $t(`models.packages.duration_units.${smsPackage.duration_unit}`) }}
+        </span>
+      </v-card-title>
+      <v-divider class=""></v-divider>
+      <v-card-text v-if="smsPackage.notes && smsPackage.notes.trim() != ''">
+        <!-- <p class="headline">
+          {{ $t("pages.create_package.form.notes.label") }}
+        </p> -->
+        <p>{{ smsPackage.notes }}</p>
+      </v-card-text>
+      <v-divider class=""></v-divider>
+      <v-card-actions class="pa-4">
+        <v-spacer></v-spacer>
+        <locked-view>
+          <v-btn color="primary" large @click="setSubscription(smsPackage.id)">
+            <v-icon>mdi-message-flash</v-icon>
+            <span class="mx-1"></span>
+            <span>
+              {{ $t("pages.show_seller.tabs.packages.subscribe") }}
+            </span>
+          </v-btn>
+        </locked-view>
+        <v-spacer></v-spacer>
+      </v-card-actions>
+    </v-card>
   </div>
 </template>
 
 <script>
-import AddFormRoute from "../../components/AddFormRoute.vue";
-import ListSmsPackages from "../../components/packages/ListSmsPackages.vue";
-import ProtectedView from "../../components/ProtectedView.vue";
+import api from "../../api";
+import { mainEventBus } from "../../main";
+import LockedView from "../../components/LockedView.vue";
+// import { mainEventBus } from "../../main";
 export default {
-  components: { AddFormRoute, ListSmsPackages, ProtectedView },
+  components: {  LockedView },
+  props: ["user-name"],
   created() {
-    this.$permissions().authorizeOneOf([
-      "packages::add",
-      "packages::remove",
-      "packages::retrieve",
-      "packages::update",
-      "packages::view_sellers",
-      "packages::set_sellers",
-      "packages::view_groups",
-      "packages::set_groups",
-    ]);
+    this.loadSellerPackages();
+  },
+  data() {
+    return {
+      smsPackages: [],
+      loading: false,
+      showSubscriptionSuccess: false,
+    };
+  },
+  computed: {},
+  methods: {
+    async loadSellerPackages() {
+      this.loading = true;
+      try {
+        const response = await api.get(`/current-seller/packages`);
+        this.smsPackages = response.data.data;
+      } catch (error) {
+        alert(error);
+      }
+      this.loading = false;
+    },
+    async setSubscription(packageId) {
+      this.loading = true;
+      try {
+        await api.post(
+          `current-seller/packages/${packageId}/subscribe`
+        );
+        mainEventBus.$emit("updateSellerSubscriptions");
+        this.showSubscriptionSuccess = true;
+      } catch (error) {
+        alert(error);
+      }
+      this.loading = false;
+    },
   },
 };
 </script>

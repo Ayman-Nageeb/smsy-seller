@@ -5,8 +5,8 @@ export default {
   setAsUnAuthenticated(state) {
     state.isAuthenticated = false;
   },
-  setSupervisor(state, supervisor) {
-    state.supervisor = supervisor;
+  setSeller(state, seller) {
+    state.seller = seller;
   },
   setAuthorizationToken(state, token) {
     state.authorizationToken = token;

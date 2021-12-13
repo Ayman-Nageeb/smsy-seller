@@ -111,8 +111,8 @@
 
 <script>
 import { mainEventBus } from "../main";
-import { login as supervisorsLogin } from "../api/supervisors";
 import responseCodes from "../api/responseCodes";
+import api from '../api';
 export default {
   name: "Home",
   data: () => ({
@@ -164,7 +164,7 @@ export default {
       this.loading = true;
 
       try {
-        const response = await supervisorsLogin(userData);
+        const response = await api.post('/login',userData);
         const data = response.data;
 
         this.responseAlert.type = "success";
@@ -177,7 +177,7 @@ export default {
 
         //set the current authenticated supervisor data
 
-        await this.$store.dispatch("Supervisors/login", data.data);
+        await this.$store.dispatch("Seller/login", data.data);
 
         //redirect the user to next
 

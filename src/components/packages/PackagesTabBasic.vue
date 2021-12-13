@@ -155,7 +155,7 @@ export default {
   props: ["sms-package"],
   computed: {
     updatePackageEndPoint() {
-      return `packages/${this.smsPackage.id}`;
+      return `current-seller/custom-packages/${this.smsPackage.id}`;
     },
     validDurations() {
       return [

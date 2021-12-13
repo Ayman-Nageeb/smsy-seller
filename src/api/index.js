@@ -2,11 +2,8 @@ import axios from "axios";
 import { responseCodes } from "./responseCodes";
 import router from "../router/index";
 import store from "../store";
-import {
-  currentSupervisorPermissionsURL,
-  logoutURL,
-  refreshCurrentSupervisorPermissions,
-} from "./supervisors";
+import { currentSupervisorPermissionsURL, logoutURL } from "./supervisors";
+import { refreshCurrentSellerPermissions } from "./seller";
 
 export const HTTP_METHOD_GET = "GET";
 export const HTTP_METHOD_POST = "POST";
@@ -20,14 +17,14 @@ export default {
     try {
       const response = await axios.request(requestConfiguration);
       //always refresh current authenticated supervisor permissions after the request is ended
-      if (store.getters["Supervisors/isAuthenticated"]) {
+      if (store.getters["Seller/isAuthenticated"]) {
         const dont_refresh_urls = [
           currentSupervisorPermissionsURL(),
           logoutURL,
         ];
 
         if (dont_refresh_urls.indexOf(url) < 0) {
-          refreshCurrentSupervisorPermissions();
+          refreshCurrentSellerPermissions();
         }
       }
       //-------------- end of refreshing permissions -------------//

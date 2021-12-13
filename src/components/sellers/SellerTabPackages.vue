@@ -87,21 +87,15 @@
       <v-divider class=""></v-divider>
       <v-card-actions class="pa-4">
         <v-spacer></v-spacer>
-        <protected-view :has="['packages::set_sellers']">
-          <locked-view>
-            <v-btn
-              color="primary"
-              large
-              @click="setSubscription(smsPackage.id)"
-            >
-              <v-icon>mdi-message-flash</v-icon>
-              <span class="mx-1"></span>
-              <span>
-                {{ $t("pages.show_seller.tabs.packages.subscribe") }}
-              </span>
-            </v-btn>
-          </locked-view>
-        </protected-view>
+        <locked-view>
+          <v-btn color="primary" large @click="setSubscription(smsPackage.id)">
+            <v-icon>mdi-message-flash</v-icon>
+            <span class="mx-1"></span>
+            <span>
+              {{ $t("pages.show_seller.tabs.packages.subscribe") }}
+            </span>
+          </v-btn>
+        </locked-view>
         <v-spacer></v-spacer>
       </v-card-actions>
     </v-card>
@@ -112,13 +106,11 @@
 import api from "../../api";
 import { mainEventBus } from "../../main";
 import LockedView from "../LockedView.vue";
-import ProtectedView from "../ProtectedView.vue";
 // import { mainEventBus } from "../../main";
 export default {
-  components: { ProtectedView, LockedView },
+  components: {  LockedView },
   props: ["user-name"],
   created() {
-    this.$permissions().authorize(["sellers::view_packages"]);
     this.loadSellerPackages();
   },
   data() {
@@ -133,7 +125,7 @@ export default {
     async loadSellerPackages() {
       this.loading = true;
       try {
-        const response = await api.get(`sellers/${this.userName}/packages`);
+        const response = await api.get(`/current-seller/packages`);
         this.smsPackages = response.data.data;
       } catch (error) {
         alert(error);

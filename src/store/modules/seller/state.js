@@ -1,6 +1,6 @@
 export default {
   isAuthenticated: false,
-  supervisor: null,
+  seller: null,
   authorizationToken: null,
   permissions: []
 };

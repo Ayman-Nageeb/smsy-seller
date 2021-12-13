@@ -21,9 +21,9 @@
             <v-list-item
               route
               :to="{
-                name: 'Supervisors.show',
+                name: 'Seller.profile',
                 params: {
-                  user_name: $store.getters['Supervisors/supervisor'].user_name,
+                  user_name: $store.getters['Seller/seller'].user_name,
                 },
               }"
             >
@@ -33,9 +33,9 @@
 
               <v-list-item-content>
                 <v-list-item-title class="font-weight-bold"
-                  >{{ $store.getters["Supervisors/supervisor"].name }}
+                  >{{ $store.getters["Seller/seller"].name }}
                   <span class="font-weight-regular primary--text">
-                    (@{{ $store.getters["Supervisors/supervisor"].user_name }})
+                    (@{{ $store.getters["Seller/seller"].user_name }})
                   </span>
                 </v-list-item-title>
 

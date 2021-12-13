@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <protected-view :has="['sellers::update']">
+    <!-- <protected-view >
       <div class="my-6"></div>
       <v-row v-if="generatedPassword.trim() != ''">
         <v-col>
@@ -10,7 +10,7 @@
             color="success"
           >
             <template v-slot:action="{ attrs }">
-              _COPIED SUCCESS
+              {{$('misc.success')}}
               <v-btn
                 color="error"
                 icon
@@ -31,7 +31,7 @@
             dismissible
           >
             <p>
-              _COPY Gen
+              {{$('pages.show_seller.tabs.operations.copy_password')}}
             </p>
             <v-text-field
               outlined
@@ -54,20 +54,39 @@
           <span>RESET</span>
         </v-btn>
       </locked-view>
-    </protected-view>
-    <protected-view
-      :has="['sellers::update']"
-      v-if="status.toUpperCase() == 'ACTIVE'"
-    >
-      <div class="my-6"></div>
-      <locked-view>
-        <v-btn color="error" large @click="$emit('suspend', 'UI EVENT')">
-          <v-icon>mdi-cancel</v-icon>
-          <span class="mx-1"></span>
-          <span>SUSPEND</span>
-        </v-btn>
-      </locked-view>
-    </protected-view>
+    </protected-view> -->
+
+    <locked-view>
+      <span class="font-weight-black"
+        >{{ $t("pages.show_seller.tabs.basic.password") }}
+        :
+      </span>
+      <editable
+        :field="{
+          name: 'password',
+          value: '',
+          confirmation: {
+            name: 'password_confirmation',
+            label: $t('misc.confirm_password'),
+            value: '',
+          },
+        }"
+        :apiEndPoint="`current-seller`"
+        type="password"
+      >
+        <v-icon size="14" color="error" v-for="index in 8" :key="index"
+          >mdi-lock</v-icon
+        >
+      </editable>
+    </locked-view>
+      <p class="my-4"></p>
+    <locked-view>
+      <v-btn color="error" large @click="$emit('suspend', 'UI EVENT')">
+        <v-icon>mdi-cancel</v-icon>
+        <span class="mx-1"></span>
+        <span>SUSPEND</span>
+      </v-btn>
+    </locked-view>
     <protected-view
       :has="['sellers::update']"
       v-if="status.toUpperCase() == 'SUSPENDED'"
@@ -81,7 +100,10 @@
         </v-btn>
       </locked-view>
     </protected-view>
-    <protected-view :has="['sellers::remove']" class="">
+    <protected-view
+      :has="['sellers::remove', 'this is for only supervisors']"
+      class=""
+    >
       <div class="my-6"></div>
       <locked-view>
         <v-btn color="error" large @click="$emit('remove', 'UI EVENT')">
@@ -95,10 +117,11 @@
 </template>
 
 <script>
+import Editable from "../Editable.vue";
 import LockedView from "../LockedView.vue";
 import ProtectedView from "../ProtectedView.vue";
 export default {
-  components: { LockedView, ProtectedView },
+  components: { LockedView, ProtectedView, Editable },
   props: {
     status: {
       type: String,

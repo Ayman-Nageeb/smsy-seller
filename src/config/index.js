@@ -21,21 +21,21 @@ export default {
     try {
       if (
         window.localStorage.getItem("authorizationToken") &&
-        window.localStorage.getItem("supervisor")
+        window.localStorage.getItem("seller")
       ) {
         const token = window.localStorage.getItem("authorizationToken");
-        const supervisor = JSON.parse(
-          window.localStorage.getItem("supervisor")
+        const seller = JSON.parse(
+          window.localStorage.getItem("seller")
         );
         const userPayload = {
           token,
-          supervisor,
+          seller,
         };
-        store.dispatch("Supervisors/login", userPayload);
+        store.dispatch("Seller/login", userPayload);
       }
     } catch (error) {
       console.error(error);
-      store.dispatch("Supervisors/logout");
+      store.dispatch("Seller/logout");
     }
   },
   loadTheme(vuetifyInstance) {

@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { logout as logoutSupervisor } from "../api/supervisors";
+import api from '../api';
 export default {
   data() {
     return {
@@ -56,9 +56,8 @@ export default {
       this.status = "loading";
       let tokens = "current";
       try {
-        await logoutSupervisor(tokens);
-
-        this.$store.dispatch("Supervisors/logout");
+        await api.get('/logout', {tokens});
+        this.$store.dispatch("Seller/logout");
 
         this.$router.push({ name: "Login" });
       } catch (error) {

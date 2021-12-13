@@ -4,8 +4,8 @@ export default {
   isAuthenticated(state) {
     return state.isAuthenticated;
   },
-  supervisor(state) {
-    return state.supervisor;
+  seller(state) {
+    return state.seller;
   },
   authorizationToken(state) {
     return state.authorizationToken;
@@ -16,14 +16,14 @@ export default {
       has: function(permissions) {
         if (!permissions) return false;
 
-        const supervisorPermissions = state.permissions;
+        const sellerPermissions = state.permissions;
         //if has no permission always return false
-        if (supervisorPermissions.length == 0) return false;
+        if (sellerPermissions.length == 0) return false;
 
         //check the required permissions one by one
         for (let permission of permissions) {
           //if permission does not exits return false
-          if (supervisorPermissions.indexOf(permission) == -1) {
+          if (sellerPermissions.indexOf(permission) == -1) {
             return false;
           }
         }
@@ -34,14 +34,14 @@ export default {
       hasOneOf: function(permissions) {
         if (!permissions) return false;
 
-        const supervisorPermissions = state.permissions;
+        const sellerPermissions = state.permissions;
         //if has no permission always return false
-        if (supervisorPermissions.length == 0) return false;
+        if (sellerPermissions.length == 0) return false;
 
         //check the required permissions one by one
         for (let permission of permissions) {
           //if permission exits return true
-          if (supervisorPermissions.indexOf(permission) > -1) {
+          if (sellerPermissions.indexOf(permission) > -1) {
             return true;
           }
         }
