@@ -5,6 +5,7 @@ import packagesRoutes from "./packages";
 import senderIdsRoutes from "./senderIds";
 import sellerRoutes from "./seller";
 import clientsRouts from './clients';
+import reportsRouts from './reports';
 
 Vue.use(VueRouter);
 
@@ -22,6 +23,7 @@ const routes = [
   ...senderIdsRoutes,
   ...sellerRoutes,
   ...clientsRouts,
+  ...reportsRouts,
   {
     path: "/unauthorized",
     name: "Unauthorized",

@@ -97,13 +97,13 @@
 
       <template v-slot:[`item.payed`]="{ item }">
         <editable
-          v-if="$permissions().has(['sellers::update_subscription'])"
+        
           :field="{ name: 'payed', value: item.payed }"
           :apiEndPoint="updateSubscriptionURL(item.id)"
           @updated="item.payed = $event"
         >
         </editable>
-        <span v-else> {{ item.payed }} </span>
+        
       </template>
 
       <template v-slot:[`item.created_at`]="{ item }">
@@ -114,7 +114,9 @@
       </template>
       <template v-slot:[`item.expired_at`]="{ item }">
         <editable
-          v-if="item.expired_at != null && $permissions().has(['sellers::update_subscription'])"
+          v-if="
+            item.confirmed_at != null 
+          "
           :field="{
             name: 'extend_expiration',
             value: 0,
@@ -168,14 +170,14 @@
 </template>
 
 <script>
-import Sugar from 'sugar';
+import Sugar from "sugar";
 import api from "../../api";
 import { mainEventBus } from "../../main";
-import ConfirmDelete from "../confirmDelete.vue";
-import Editable from "../Editable.vue";
-import { datatableColumn } from "../ListDataTable.vue";
-import RelativeDate from "../RelativeDate.vue";
-import searchField from "../searchField.vue";
+import ConfirmDelete from "../../components/confirmDelete.vue";
+import Editable from "../../components/Editable.vue";
+import { datatableColumn } from "../../components/ListDataTable.vue";
+import RelativeDate from "../../components/RelativeDate.vue";
+import searchField from "../../components/searchField.vue";
 import SellerSubscriptionStatusView from "./SellerSubscriptionStatusView.vue";
 export default {
   components: {
@@ -187,7 +189,6 @@ export default {
   },
   props: ["user-name"],
   created() {
-    this.$permissions().authorize(["sellers::view_subscriptions"]);
     mainEventBus.$on("updateSellerSubscriptions", this.loadSellerSubscriptions);
     this.loadSellerSubscriptions();
   },
@@ -334,7 +335,7 @@ export default {
       this.loading = true;
       try {
         const response = await api.get(
-          `sellers/${this.userName}/subscriptions`
+          `/current-seller/clients/${this.userName}/subscriptions`
         );
         this.subscriptions = response.data.data;
       } catch (error) {
@@ -347,7 +348,7 @@ export default {
       this.updatingStatus = true;
       try {
         await api.post(
-          `sellers/${this.userName}/subscriptions/${id}/deactivate`
+          `/current-seller/clients/${this.userName}/subscriptions/${id}/deactivate`
         );
         this.loadSellerSubscriptions();
       } catch (error) {
@@ -358,13 +359,13 @@ export default {
     },
 
     updateSubscriptionURL(id) {
-      return `sellers/${this.userName}/subscriptions/${id}`;
+      return `/current-seller/clients/${this.userName}/subscriptions/${id}`;
     },
     async activateSubscription(id) {
       this.ActionSubscriptionId = id;
       this.updatingStatus = true;
       try {
-        await api.post(`sellers/${this.userName}/subscriptions/${id}/activate`);
+        await api.post(`/current-seller/clients/${this.userName}/subscriptions/${id}/activate`);
         this.loadSellerSubscriptions();
       } catch (error) {
         alert(error);
@@ -378,7 +379,7 @@ export default {
       this.showConfirmDelete = false;
       this.removingSubscription = true;
       try {
-        await api.delete(`sellers/${this.userName}/subscriptions/${id}`);
+        await api.delete(`/current-seller/clients/${this.userName}/subscriptions/${id}`);
         this.loadSellerSubscriptions();
       } catch (error) {
         alert(error);

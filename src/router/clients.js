@@ -1,5 +1,13 @@
 const routes = [
   {
+    path: "/subscriptions-requests",
+    name: "SubscriptionsRequests.index",
+    component: () =>
+      import(
+        /* webpackChunkName: "subscriptions-requests.index" */ "../views/SubscriptionsRequests.vue"
+      ),
+  },
+  {
     path: "/clients",
     name: "Clients.index",
     component: () =>

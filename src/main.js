@@ -9,6 +9,11 @@ import FlashMessage from "@smartweb/vue-flash-message";
 import "roboto-fontface/css/roboto/roboto-fontface.css";
 import "@mdi/font/css/materialdesignicons.css";
 
+import DatetimePicker from "vuetify-datetime-picker";
+// (Optional) import 'vuetify-datetime-picker/src/stylus/main.styl'
+
+Vue.use(DatetimePicker);
+
 import APIConfig from "./api/config";
 import userConfig from "./config/index";
 

@@ -55,7 +55,7 @@
           </v-tab-item>
 
           <v-tab-item value="subscriptions">
-            <seller-tab-subscriptions :user-name="seller.user_name" />
+            <client-tab-subscriptions :user-name="seller.user_name" />
           </v-tab-item>
 
           <v-tab-item value="sender_ids">
@@ -93,19 +93,19 @@
 import api from "../../api";
 import ConfirmDelete from "../../components/confirmDelete.vue";
 import SellerStatus from "../../components/sellers/SellerStatus.vue";
-import SellerTabSubscriptions from "../../components/sellers/SellerTabSubscriptions.vue";
 import { mainEventBus } from "../../main";
 import ClientTabBasic from './ClientTabBasic.vue';
 import ClientTabOperations from './ClientTabOperations.vue';
 import ClientTabSenderIds from './ClientTabSenderIds.vue';
+import ClientTabSubscriptions from './ClientTabSubscriptions.vue';
 export default {
   components: {
     ConfirmDelete,
     SellerStatus,
-    SellerTabSubscriptions,
     ClientTabBasic,
     ClientTabOperations,
     ClientTabSenderIds,
+    ClientTabSubscriptions,
   },
   async created() {
     await this.loadSeller();

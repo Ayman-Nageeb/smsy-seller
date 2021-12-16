@@ -60,6 +60,7 @@
           "title": "subscriptions",
           "headers": {
             "package": "Package",
+            "client": "Client",
             "capacity": "Capacity",
             "used": "Used",
             "remaining": "Remaining",
@@ -262,6 +263,22 @@
           "title": "Sender IDS"
         }
       }
+    },
+    "subscription_requests": {
+      "title": "Unconfirmed Subscription requests"
+    },
+    "reports": {
+      "title": "Report",
+      "subtitle": "Data and fact on the system",
+      "form": {
+        "calculate": "Calculate",
+        "start_date": {
+          "label": "Start Date"
+        },
+        "end_date": {
+          "label": "End Date"
+        }
+      }
     }
   },
   "navigation": {
@@ -269,7 +286,9 @@
       "packages": "SMS Packages",
       "sender_ids": "SMS Sender IDs",
       "subscriptions": "Subscriptions",
-      "custom_packages": "My Packages"
+      "custom_packages": "My Packages",
+      "packages_invoices": "My Subscription",
+      "clients": "Clients"
     }
   },
   "components": {
